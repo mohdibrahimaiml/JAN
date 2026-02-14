@@ -1,120 +1,130 @@
-/**
- * Janitza's Valentine Website - Narrative Engine
- */
+// JANITZA - Cinematic Logic Standard
+const CONFIG = {
+    hearts: ['❤️', '💖', '✨', '🌹'],
+    videoDelay: 400
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollObserver();
-    initPhysics(); // Subtle background
+    initParticles();
     initAudio();
+    checkAccessibility();
 });
 
 function initScrollObserver() {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.8 // Trigger ONLY when almost fully snapped
+        threshold: 0.2 // Requirement 3: 20% visible
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Optional: Unobserve if we want it to only animate once
-                // observer.unobserve(entry.target); 
+                const section = entry.target;
+                revealSection(section);
+                observer.unobserve(section); // Requirement 3: Animate only once
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.story-screen, footer').forEach(screen => {
-        observer.observe(screen);
+    document.querySelectorAll('.story-screen').forEach(section => {
+        observer.observe(section);
     });
+}
+
+function revealSection(section) {
+    // Reveal child items
+    const items = section.querySelectorAll('.reveal-item');
+    items.forEach(item => {
+        item.classList.add('revealed');
+    });
+
+    // Special logic for Video (Requirement 8)
+    const videoWrapper = section.querySelector('.video-wrapper');
+    if (videoWrapper) {
+        setTimeout(() => {
+            videoWrapper.classList.add('revealed');
+        }, CONFIG.videoDelay);
+    }
+
+    // Final section specifics (Requirement 9)
+    if (section.id === 'Final') {
+        document.body.classList.add('no-particles');
+    } else {
+        document.body.classList.add('show-particles');
+    }
 }
 
 function initAudio() {
     const btn = document.getElementById('play-voice-btn');
     const audio = document.getElementById('voice-audio');
+    if (!btn || !audio) return;
 
-    if (btn && audio) {
-        btn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                btn.textContent = "Playing...";
-            } else {
-                audio.pause();
-                btn.textContent = "Listen to my voice";
-            }
-        });
+    btn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            btn.textContent = "🔊 Playing Story...";
+        } else {
+            audio.pause();
+            btn.textContent = "Listen to the Story";
+        }
+    });
 
-        audio.addEventListener('ended', () => {
-            btn.textContent = "Listen again";
-        });
+    audio.addEventListener('ended', () => {
+        btn.textContent = "Listen again";
+    });
+}
+
+function initParticles() {
+    const container = document.getElementById('particles-container');
+    if (!container) return;
+
+    // Requirement 11: Reduce particles on mobile
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 8 : 15;
+
+    for (let i = 0; i < count; i++) {
+        createHeart(container);
     }
 }
 
-// --- Antigravity Physics (Background Only) ---
-// Simplified from previous version to be very subtle
+function createHeart(container) {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerText = CONFIG.hearts[Math.floor(Math.random() * CONFIG.hearts.length)];
 
-const CONFIG = {
-    words: ["Janitza", "Reina", "Forever", "Peace", "Love"],
-    hearts: ["❤️", "💖", "💗"], // Heart particles
-    gravity: 0.05, // Very low gravity for words
-    drag: 0.01
-};
+    resetHeart(heart);
+    container.appendChild(heart);
+}
 
-function initPhysics() {
-    const container = document.getElementById('floating-words-container');
-    const particles = [];
+function resetHeart(heart) {
+    // Slow, subtle, unintentional movement (Requirement 6)
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const duration = 30000 + Math.random() * 40000; // Very slow
 
-    // Create Words
-    CONFIG.words.forEach(text => {
-        createParticle(text, 'word');
-    });
+    heart.style.left = `${x}vw`;
+    heart.style.top = `${y}vh`;
+    heart.style.transition = `all ${duration}ms linear`;
 
-    // Create Hearts (More of them, floating upwards)
-    for (let i = 0; i < 20; i++) {
-        createParticle(CONFIG.hearts[Math.floor(Math.random() * CONFIG.hearts.length)], 'heart');
-    }
+    setTimeout(() => {
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.top = `${Math.random() * 100}vh`;
+    }, 100);
 
-    function createParticle(text, type) {
-        const el = document.createElement('div');
-        el.classList.add(type === 'heart' ? 'floating-heart' : 'floating-word');
-        el.textContent = text;
-        container.appendChild(el);
+    heart.addEventListener('transitionend', () => resetHeart(heart), { once: true });
+}
 
-        particles.push({
-            el: el,
-            type: type,
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-            vx: (Math.random() - 0.5) * (type === 'heart' ? 0.3 : 0.5),
-            vy: (Math.random() - 0.5) * (type === 'heart' ? 0.8 : 0.5) - (type === 'heart' ? 0.5 : 0) // Hearts float up
+function checkAccessibility() {
+    // Requirement 12: Reduced Motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.body.classList.add('no-animations');
+        const container = document.getElementById('particles-container');
+        if (container) container.innerHTML = '';
+
+        document.querySelectorAll('.reveal-item, .video-wrapper').forEach(el => {
+            el.classList.add('revealed');
         });
-    }
-
-    function loop() {
-        particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-
-            // Bounce words, Wrap hearts
-            if (p.type === 'word') {
-                if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
-                if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
-            } else {
-                // Hearts wrap around to bottom to float up forever
-                if (p.y < -50) p.y = window.innerHeight + 50;
-                if (p.x < -50) p.x = window.innerWidth + 50;
-                if (p.x > window.innerWidth + 50) p.x = -50;
-            }
-
-            p.el.style.transform = `translate3d(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px, 0)`;
-        });
-        requestAnimationFrame(loop);
-    }
-
-    // Only run if not reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReducedMotion) {
-        loop();
     }
 }

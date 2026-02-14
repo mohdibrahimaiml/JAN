@@ -9,137 +9,107 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <!-- Floating Background (Subtle) -->
-    <div id="floating-words-container" aria-hidden="true"></div>
+    <div id="particles-container" aria-hidden="true"></div>
 
     <main>
-        <!-- Screen 1: Beginning -->
+        <!-- Requirement 2, 4, 7 apply to all sections -->
+
         <section class="story-screen" id="Beginning">
             <div class="content-wrapper">
-                <p class="fade-in-1">2 years ago…</p>
-                <p class="fade-in-2">It started with a simple message on HelloTalk.</p>
-                <p class="fade-in-3">I didn’t know I had just met the <br><span class="script-font highlight-text"
-                        style="font-size: 2.5em; display: inline-block; margin-top: 10px;">best part of my life.</span>
-                </p>
+                <p class="reveal-item delay-1">2 years ago…</p>
+                <p class="reveal-item delay-2">It started with a simple message on HelloTalk.</p>
+                <h1 class="reveal-item delay-3">I didn’t know I had just met the <span class="highlight-text">best part
+                        of my life.</span></h1>
             </div>
-            <div class="scroll-prompt">↓</div>
         </section>
 
-        <!-- Screen 2: Her Name -->
         <section class="story-screen" id="Name">
-            <div class="content-wrapper center-text">
-                <h1 class="fade-in-1 big-name">Janitza.</h1>
-                <p class="fade-in-2 subtitle">Mi reina.</p>
+            <div class="content-wrapper">
+                <p class="reveal-item delay-1">Mi reina.</p>
+                <h1 class="reveal-item delay-2">Janitza.</h1>
             </div>
         </section>
 
-        <!-- Screen 3: Who she really is -->
         <section class="story-screen" id="WhoSheIs">
             <div class="content-wrapper">
-                <p class="fade-in-1">I know people see many things…</p>
-                <p class="fade-in-2 highlight-text">But I see the woman who wakes up and goes to the gym…</p>
-                <p class="fade-in-3">who works hard…</p>
-                <p class="fade-in-4">who plans her life carefully…</p>
-                <p class="fade-in-5">who is disciplined and intelligent…</p>
-                <p class="fade-in-6">and still has a smile that makes everything lighter.</p>
+                <p class="reveal-item delay-1">I know people see many things…</p>
+                <p class="reveal-item delay-2 highlight-text">But I see the woman who wakes up and goes to the gym.</p>
+                <p class="reveal-item delay-3">The woman who is disciplined and intelligent.</p>
+                <p class="reveal-item delay-4">The woman whose smile makes everything lighter.</p>
             </div>
         </section>
 
-        <!-- Screen 4: The side only you see -->
         <section class="story-screen" id="Intimacy">
             <div class="content-wrapper">
-                <p class="fade-in-1">I see the side that laughs at random things…</p>
-                <p class="fade-in-2">the side that acts like a baby with me sometimes…</p>
-                <p class="fade-in-3">the kisses that feel real…</p>
-                <p class="fade-in-4 highlight-text">and the little yawn that tells me you want to end a call.</p>
+                <p class="reveal-item delay-1">I see the side that laughs at random things.</p>
+                <p class="reveal-item delay-2">The side that acts like a baby with me sometimes.</p>
+                <p class="reveal-item delay-3 highlight-text">And the little yawn that tells me you want to end a call.
+                </p>
             </div>
         </section>
 
-        <!-- Screen 5: January (Turning Point) -->
         <section class="story-screen" id="January">
             <div class="content-wrapper">
-                <p class="fade-in-1">I still remember January…</p>
-                <p class="fade-in-2">We were both scared.</p>
-                <p class="fade-in-3">You thought distance, age, and everything around us would be too hard.</p>
-                <div class="spacer"></div>
-                <p class="fade-in-4">But we talked.</p>
-                <p class="fade-in-5">We cried.</p>
-                <p class="fade-in-6">And we stayed.</p>
-                <div class="spacer"></div>
-                <p class="fade-in-7 highlight-text">And now… everything feels stronger.</p>
+                <p class="reveal-item delay-1">I still remember January…</p>
+                <p class="reveal-item delay-2">We were both scared of the distance.</p>
+                <p class="reveal-item delay-3">But we talked. We cried. And we stayed.</p>
+                <p class="reveal-item delay-4 highlight-text">And now… everything feels stronger.</p>
             </div>
         </section>
 
-        <!-- Screen 6: Her Words -->
         <section class="story-screen" id="Quote">
-            <div class="content-wrapper center-text">
-                <h2 class="fade-in-1 big-quote">“You once told me I am your rey.”</h2>
-                <p class="fade-in-2 subtitle">I never forgot that.</p>
+            <div class="content-wrapper">
+                <p class="reveal-item delay-1">I never forgot what you said.</p>
+                <h1 class="reveal-item delay-2">“You once told me I am your rey.”</h1>
             </div>
         </section>
 
-        <!-- Screen 7: Reassurance -->
         <section class="story-screen" id="Reassurance">
             <div class="content-wrapper">
-                <p class="fade-in-1">I know sometimes you worry about getting older…</p>
-                <p class="fade-in-2">I know sometimes you think I might leave…</p>
-                <div class="spacer"></div>
-                <p class="fade-in-3 highlight-text">But what I feel for you isn’t something temporary.</p>
-                <p class="fade-in-4">I am here because I want to be here.</p>
+                <p class="reveal-item delay-1">I know you worry sometimes.</p>
+                <p class="reveal-item delay-2 highlight-text">But what I feel for you isn’t temporary.</p>
+                <p class="reveal-item delay-3">I am here because I want to be here.</p>
             </div>
         </section>
 
-        <!-- Screen 8: Value -->
         <section class="story-screen" id="Value">
             <div class="content-wrapper">
-                <p class="fade-in-1">You bring me peace.</p>
-                <p class="fade-in-2">You bring me happiness.</p>
-                <p class="fade-in-3">You bring value into my life in a way no one else has.</p>
+                <p class="reveal-item delay-1">You bring me peace.</p>
+                <p class="reveal-item delay-2 highlight-text">You bring value into my life in a way no one else has.</p>
             </div>
         </section>
 
-        <!-- Screen 9: Video -->
-        <section class="story-screen" id="Video">
-            <div class="content-wrapper center-text">
-                <p class="fade-in-1 intro-text">Until I can hold you for real…</p>
-
-                <div class="video-wrapper fade-in-2">
-                    <video id="hug-video" playsinline controls preload="metadata">
+        <section class="story-screen" id="VideoMoment">
+            <div class="content-wrapper">
+                <p class="reveal-item delay-1">Until I can hold you for real…</p>
+                <!-- Requirement 8: Delayed reveal logic in scripts.js -->
+                <div class="video-wrapper">
+                    <video controls playsinline poster="assets/photos/.gitkeep">
                         <source src="assets/hug-video.mp4" type="video/mp4">
-                        <track kind="captions" src="assets/video-transcript.txt" srclang="en" label="English">
                     </video>
                 </div>
             </div>
         </section>
 
-        <!-- Screen 10: Ending -->
-        <section class="story-screen final-screen" id="Ending">
-            <div class="content-wrapper center-text">
-                <h1 class="fade-in-1 big-final">Te amo, mi reina.</h1>
-                <p class="fade-in-2 subtitle">I’m still here.</p>
-
-                <div class="final-actions fade-in-3">
-                    <button id="play-voice-btn" class="ios-btn">Listen to my voice</button>
-                    <!-- Hidden audio player -->
-                    <audio id="voice-audio" preload="none">
-                        <source src="assets/voice.ogg" type="audio/ogg">
-                    </audio>
-                </div>
+        <section class="story-screen" id="Final">
+            <div class="content-wrapper">
+                <!-- Requirement 9: Still and quiet -->
+                <h1 class="reveal-item delay-1">Te amo, Janitza.</h1>
+                <p class="reveal-item delay-2 subtitle">Happy Valentine's Day.</p>
+                <button id="play-voice-btn" class="ios-btn reveal-item delay-3">Listen to the Story</button>
+                <audio id="voice-audio">
+                    <source src="assets/voice.ogg" type="audio/ogg">
+                </audio>
             </div>
         </section>
-
     </main>
-
-    <footer class="fade-in-delayed">
-        <p>Private page for Janitza.</p>
-    </footer>
 
     <script src="scripts.js"></script>
 </body>
